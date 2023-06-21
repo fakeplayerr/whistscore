@@ -1,0 +1,147 @@
+[gd_scene load_steps=7 format=3 uid="uid://tfqdb43t237a"]
+
+[ext_resource type="Script" path="res://resources/game.gd" id="1_vhiy2"]
+[ext_resource type="Script" path="res://resources/scoreboard.gd" id="2_tapfr"]
+[ext_resource type="Script" path="res://resources/globals.gd" id="3_0sghx"]
+[ext_resource type="Theme" uid="uid://bed6prpoafpry" path="res://assets/theme.tres" id="4_67ttm"]
+
+[sub_resource type="Resource" id="Resource_ixh6a"]
+script = ExtResource("2_tapfr")
+players = Array[Resource("res://resources/player.gd")]([])
+
+[sub_resource type="Resource" id="Resource_83wkw"]
+script = ExtResource("3_0sghx")
+score = 0
+game_name = "Whist Score"
+number_of_players = 0
+
+[node name="Node" type="Node"]
+script = ExtResource("1_vhiy2")
+scoreboard = SubResource("Resource_ixh6a")
+globals = SubResource("Resource_83wkw")
+
+[node name="StartScreen" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameTitle" type="Label" parent="StartScreen"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("4_67ttm")
+theme_override_font_sizes/font_size = 40
+text = "Game title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Choose" type="Label" parent="StartScreen"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("4_67ttm")
+theme_override_font_sizes/font_size = 20
+text = "Choose number of players"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerCount" type="HBoxContainer" parent="StartScreen"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="StartScreen/PlayerCount"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_67ttm")
+text = "Number of players:"
+
+[node name="OptionButton" type="OptionButton" parent="StartScreen/PlayerCount"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_67ttm")
+theme_override_font_sizes/font_size = 30
+alignment = 1
+item_count = 4
+selected = 0
+popup/item_0/text = "3"
+popup/item_0/id = 3
+popup/item_1/text = "4"
+popup/item_1/id = 4
+popup/item_2/text = "5"
+popup/item_2/id = 5
+popup/item_3/text = "6"
+popup/item_3/id = 6
+
+[node name="PlayerList" type="VBoxContainer" parent="StartScreen"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Next" type="Button" parent="StartScreen"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme = ExtResource("4_67ttm")
+theme_override_font_sizes/font_size = 30
+text = "Next"
+
+[node name="GameScreen" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 648.0
+offset_right = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game" type="Label" parent="GameScreen"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("4_67ttm")
+theme_override_font_sizes/font_size = 40
+text = "Game 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Choose" type="Label" parent="GameScreen"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("4_67ttm")
+theme_override_font_sizes/font_size = 20
+text = "Choose number of players"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GameScreen"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameScreen/ScrollContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RoundsList" type="VBoxContainer" parent="GameScreen/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="RoundsGrid" type="GridContainer" parent="GameScreen/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_67ttm")
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 3
+
+[node name="Back" type="Button" parent="GameScreen"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme = ExtResource("4_67ttm")
+theme_override_font_sizes/font_size = 30
+text = "Back"
+
+[connection signal="item_selected" from="StartScreen/PlayerCount/OptionButton" to="." method="_on_number_of_players_selected"]
+[connection signal="button_up" from="StartScreen/Next" to="." method="_on_next_button_up"]
+[connection signal="button_up" from="GameScreen/Back" to="." method="_on_back_button_up"]

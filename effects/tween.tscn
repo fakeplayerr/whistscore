@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://yqtk12djqhq8"]
+
+[ext_resource type="Script" path="res://effects/tween.gd" id="1_jqc6t"]
+
+[node name="Tween" type="Node"]
+script = ExtResource("1_jqc6t")
+from = 2
+to = 4

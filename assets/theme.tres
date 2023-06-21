@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bed6prpoafpry"]
+
+[ext_resource type="FontFile" uid="uid://bfr8bq6u7nd53" path="res://assets/fonts/serio_gd.tres" id="1_bogw7"]
+
+[resource]
+default_font = ExtResource("1_bogw7")
