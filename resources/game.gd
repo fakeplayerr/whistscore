@@ -15,23 +15,31 @@ class_name GameInfo
 @onready var round_skin = preload("res://skins/round_skin.tscn")
 @onready var round_header = preload("res://skins/round_header/round_header.tscn")
 
-@onready var player_ui = $StartScreen/Control
+@onready var player_ui = $AddPlayerUI
 
 func _ready() -> void:
-	player_ui.connect("add_player",print_name)
+	player_ui.connect("add_player",add_player_name)
 	set_defaults()
 
-func add_players(name):
+func add_player_name(player_name):
+	
+	var player = Player.new()
+	player.name = player_name
+	scoreboard.round_manager.players.push_back(player)
+	player_ui.hide()
+	refresh_players_table()
+	
+func add_players_to_list(player_name):
 	var new_label = Label.new()
-	new_label.text = name
+	new_label.text = player_name
 	new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	player_list.add_child(new_label)
 
 func refresh_players_table():
 	for child in player_list.get_children():
 		player_list.remove_child(child)
-	for i in globals.number_of_players:
-		add_players(str("Player " , i))
+	for i in scoreboard.round_manager.players:
+		add_players_to_list(str("%s", i.name))
 		
 func back_to_start_menu():
 	var tween = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_OUT)
@@ -39,8 +47,6 @@ func back_to_start_menu():
 	var tween2 = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_OUT)
 	tween2.tween_property($GameScreen, "position", Vector2($GameScreen.size.x,0),0.2)
 	
-func print_name(p_name):
-	print(p_name)
 
 func create_rounds():
 	round_list.clear()
@@ -64,8 +70,9 @@ func set_defaults():
 	# set the roundsList number
 	print(globals.number_of_players)
 	
-	for i in globals.number_of_players:
-		add_players(str("Player " , i))
+#
+#	for i in globals.number_of_players:
+#		add_players(str("Player " , i))
 	
 	create_rounds()
 	refresh_round_list_table()
@@ -136,3 +143,7 @@ func animate_menu():
 
 #	for sprite in get_children():
 #		tween.tween_property(sprite, "position", Vector2(0, 0), 1)
+
+
+func _on_add_player_button_pressed():
+	player_ui.show()

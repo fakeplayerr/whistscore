@@ -5,9 +5,16 @@ signal add_player
 
 @onready var player_name_text = $VBoxContainer/MarginContainer/Label
 
+func _ready():
+	player_name_text.text = ""
+
 func _on_line_edit_text_changed(new_text):
 	player_name_text.text = new_text
 
 
 func _on_add_player_button_pressed():
 	add_player.emit(player_name_text.text)
+
+
+func _on_hidden():
+	player_name_text.text = ""
