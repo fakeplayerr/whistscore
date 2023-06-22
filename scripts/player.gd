@@ -1,5 +1,5 @@
 extends BaseCharacter
-class_name Player
+class_name PlayerOld
 
 var player_name = "Player 1"
 

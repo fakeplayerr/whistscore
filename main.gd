@@ -5,7 +5,7 @@ extends Control
 @onready var list_display = $RichTextLabel
 @onready var health_display = $Health
 @onready var player = Player.new()
-@onready var game = GameInfo.new()
+@onready var game: GameInfo = GameInfo.new()
 
 func _ready():
 	add_button.connect("pressed", _on_button_pressed)
@@ -15,7 +15,6 @@ func _ready():
 
 func updateUI():
 	health_display.text = str(player.health)
-	game.log()
 
 func _on_button_pressed():
 	player.take_damage(10)

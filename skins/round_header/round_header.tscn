@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://qw7udh75w3op"]
+
+[ext_resource type="Script" path="res://skins/round_skin.gd" id="1_oroad"]
+[ext_resource type="Theme" uid="uid://bed6prpoafpry" path="res://assets/theme.tres" id="2_8lod3"]
+[ext_resource type="PackedScene" uid="uid://yqtk12djqhq8" path="res://effects/tween.tscn" id="3_uk18t"]
+
+[node name="RoundSkin" type="Control"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_oroad")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.346231, 0.566183, 0.530101, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_8lod3")
+theme_override_font_sizes/font_size = 30
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tween" parent="." node_paths=PackedStringArray("current_node") instance=ExtResource("3_uk18t")]
+current_node = NodePath("..")
+
+[connection signal="focus_entered" from="ColorRect" to="." method="_on_color_rect_focus_entered"]
+[connection signal="gui_input" from="ColorRect" to="." method="_on_color_rect_gui_input"]
