@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://tfqdb43t237a"]
+[gd_scene load_steps=8 format=3 uid="uid://tfqdb43t237a"]
 
 [ext_resource type="Script" path="res://resources/game.gd" id="1_vhiy2"]
 [ext_resource type="Script" path="res://resources/scoreboard.gd" id="2_tapfr"]
 [ext_resource type="Script" path="res://resources/globals.gd" id="3_0sghx"]
 [ext_resource type="Theme" uid="uid://bed6prpoafpry" path="res://assets/theme.tres" id="4_67ttm"]
+[ext_resource type="PackedScene" uid="uid://dqxvk0o33w81s" path="res://UI/add_player_ui/add_player_ui.tscn" id="5_2af4v"]
 
 [sub_resource type="Resource" id="Resource_ixh6a"]
 script = ExtResource("2_tapfr")
@@ -71,6 +72,10 @@ popup/item_2/text = "5"
 popup/item_2/id = 5
 popup/item_3/text = "6"
 popup/item_3/id = 6
+
+[node name="Control" parent="StartScreen" instance=ExtResource("5_2af4v")]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
 
 [node name="PlayerList" type="VBoxContainer" parent="StartScreen"]
 layout_mode = 2

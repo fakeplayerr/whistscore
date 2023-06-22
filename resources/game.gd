@@ -15,8 +15,10 @@ class_name GameInfo
 @onready var round_skin = preload("res://skins/round_skin.tscn")
 @onready var round_header = preload("res://skins/round_header/round_header.tscn")
 
+@onready var player_ui = $StartScreen/Control
 
 func _ready() -> void:
+	player_ui.connect("add_player",print_name)
 	set_defaults()
 
 func add_players(name):
@@ -37,7 +39,8 @@ func back_to_start_menu():
 	var tween2 = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_OUT)
 	tween2.tween_property($GameScreen, "position", Vector2($GameScreen.size.x,0),0.2)
 	
-
+func print_name(p_name):
+	print(p_name)
 
 func create_rounds():
 	round_list.clear()
