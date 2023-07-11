@@ -88,6 +88,22 @@ layout_mode = 2
 theme = ExtResource("2_3wxwr")
 text = "Add Player"
 
+[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Back" type="Button" parent="VBoxContainer/MarginContainer5"]
+layout_mode = 2
+theme = ExtResource("2_3wxwr")
+text = "Back"
+
 [connection signal="hidden" from="." to="." method="_on_hidden"]
 [connection signal="text_changed" from="VBoxContainer/MarginContainer2/LineEdit" to="." method="_on_line_edit_text_changed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer4/AddPlayerButton" to="." method="_on_add_player_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer5/Back" to="." method="_on_back_pressed"]

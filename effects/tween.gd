@@ -8,7 +8,6 @@ class_name TweenEffect
 @onready var currentPosition : Vector2 = Vector2(0,0)
 
 func play_tween():
-	return
 	print("REVERT: ", revertPosition)
 	currentPosition = current_node.position
 	if !revertPosition:

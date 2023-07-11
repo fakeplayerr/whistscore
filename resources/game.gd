@@ -14,20 +14,18 @@ class_name GameInfo
 @onready var rounds_count = []
 @onready var round_skin = preload("res://skins/round_skin.tscn")
 @onready var round_header = preload("res://skins/round_header/round_header.tscn")
-
-@onready var player_ui = $AddPlayerUI
+@onready var add_player_ui = preload("res://UI/add_player_ui/add_player_ui.tscn")
 
 func _ready() -> void:
-	player_ui.connect("add_player",add_player_name)
+	
 	set_defaults()
 
 func add_player_name(player_name):
-	
-	var player = Player.new()
-	player.name = player_name
-	scoreboard.round_manager.players.push_back(player)
-	player_ui.hide()
-	refresh_players_table()
+	if player_name != "":
+		var player = Player.new()
+		player.name = player_name
+		scoreboard.round_manager.players.push_back(player)
+		refresh_players_table()
 	
 func add_players_to_list(player_name):
 	var new_label = Label.new()
@@ -39,7 +37,7 @@ func refresh_players_table():
 	for child in player_list.get_children():
 		player_list.remove_child(child)
 	for i in scoreboard.round_manager.players:
-		add_players_to_list(str("%s", i.name))
+		add_players_to_list(str(i.name))
 		
 func back_to_start_menu():
 	var tween = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_OUT)
@@ -84,9 +82,9 @@ func refresh_round_list_grid():
 	for child in rounds_grid.get_children():
 		rounds_grid.remove_child(child)
 	for child in globals.number_of_players:
-		for round in round_list:
+		for r in round_list:
 			var skin = round_skin.instantiate()
-			skin.set_label(round)
+			skin.set_label(r)
 			skin.set_color(Color.from_hsv(randf(),randf(),randf()))
 			rounds_grid.add_child(skin)
 		
@@ -95,9 +93,9 @@ func refresh_round_list_table():
 	for child in rounds_list_container.get_children():
 		rounds_list_container.remove_child(child)
 #	rounds_list_container.columns = globals.number_of_players
-	for round in round_list:
+	for r in round_list:
 		var skin = round_header.instantiate()
-		skin.set_label(round)
+		skin.set_label(r)
 #		skin.set_color(Color.from_hsv(randf(),randf(),randf()))
 		
 		rounds_list_container.add_child(skin)
@@ -146,4 +144,6 @@ func animate_menu():
 
 
 func _on_add_player_button_pressed():
-	player_ui.show()
+	var apu = add_player_ui.instantiate()
+	apu.connect("add_player",add_player_name)
+	add_child(apu)

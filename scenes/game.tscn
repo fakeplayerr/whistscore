@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://tfqdb43t237a"]
+[gd_scene load_steps=9 format=3 uid="uid://tfqdb43t237a"]
 
 [ext_resource type="Script" path="res://resources/game.gd" id="1_vhiy2"]
 [ext_resource type="Script" path="res://resources/round_manager.gd" id="2_r24p6"]
 [ext_resource type="Script" path="res://resources/scoreboard.gd" id="2_tapfr"]
 [ext_resource type="Script" path="res://resources/globals.gd" id="3_0sghx"]
 [ext_resource type="Theme" uid="uid://bed6prpoafpry" path="res://assets/theme.tres" id="4_67ttm"]
-[ext_resource type="PackedScene" uid="uid://dqxvk0o33w81s" path="res://UI/add_player_ui/add_player_ui.tscn" id="5_2af4v"]
 
 [sub_resource type="Resource" id="Resource_i2qve"]
 script = ExtResource("2_r24p6")
@@ -150,10 +149,6 @@ layout_mode = 2
 theme = ExtResource("4_67ttm")
 theme_override_font_sizes/font_size = 30
 text = "Back"
-
-[node name="AddPlayerUI" parent="." instance=ExtResource("5_2af4v")]
-visible = false
-custom_minimum_size = Vector2(0, 300)
 
 [connection signal="item_selected" from="StartScreen/PlayerCount/OptionButton" to="." method="_on_number_of_players_selected"]
 [connection signal="pressed" from="StartScreen/AddPlayerButton" to="." method="_on_add_player_button_pressed"]

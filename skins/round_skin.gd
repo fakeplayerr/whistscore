@@ -18,5 +18,5 @@ func _on_color_rect_focus_entered() -> void:
 	$Tween.play_tween()
 
 
-func _on_color_rect_gui_input(event: InputEvent) -> void:
+func _on_color_rect_gui_input() -> void:
 	$Tween.play_tween()
