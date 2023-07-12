@@ -1,30 +1,30 @@
 [gd_scene load_steps=9 format=3 uid="uid://tfqdb43t237a"]
 
 [ext_resource type="Script" path="res://resources/game.gd" id="1_vhiy2"]
-[ext_resource type="Script" path="res://resources/round_manager.gd" id="2_r24p6"]
-[ext_resource type="Script" path="res://resources/scoreboard.gd" id="2_tapfr"]
-[ext_resource type="Script" path="res://resources/globals.gd" id="3_0sghx"]
+[ext_resource type="Script" path="res://resources/scoreboard.gd" id="2_1qrak"]
+[ext_resource type="Script" path="res://resources/round_manager.gd" id="2_5rmhc"]
+[ext_resource type="Script" path="res://resources/globals.gd" id="3_ut2ur"]
 [ext_resource type="Theme" uid="uid://bed6prpoafpry" path="res://assets/theme.tres" id="4_67ttm"]
 
-[sub_resource type="Resource" id="Resource_i2qve"]
-script = ExtResource("2_r24p6")
+[sub_resource type="Resource" id="Resource_r2c4k"]
+script = ExtResource("2_5rmhc")
 rounds = Array[Resource("res://resources/round.gd")]([])
 players = Array[Resource("res://resources/player.gd")]([])
 
-[sub_resource type="Resource" id="Resource_ixh6a"]
-script = ExtResource("2_tapfr")
-round_manager = SubResource("Resource_i2qve")
+[sub_resource type="Resource" id="Resource_em1av"]
+script = ExtResource("2_1qrak")
+round_manager = SubResource("Resource_r2c4k")
 
-[sub_resource type="Resource" id="Resource_83wkw"]
-script = ExtResource("3_0sghx")
+[sub_resource type="Resource" id="Resource_r1kke"]
+script = ExtResource("3_ut2ur")
 score = 0
-game_name = "Whist Score"
+game_name = "GG"
 number_of_players = 0
 
-[node name="Node" type="Node"]
+[node name="Game" type="Node"]
 script = ExtResource("1_vhiy2")
-scoreboard = SubResource("Resource_ixh6a")
-globals = SubResource("Resource_83wkw")
+scoreboard = SubResource("Resource_em1av")
+globals = SubResource("Resource_r1kke")
 
 [node name="StartScreen" type="VBoxContainer" parent="."]
 anchors_preset = 15
@@ -138,8 +138,8 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="RoundsGrid" type="GridContainer" parent="GameScreen/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(544, 836)
 layout_mode = 2
-size_flags_horizontal = 3
 theme = ExtResource("4_67ttm")
 columns = 3
 
@@ -150,7 +150,15 @@ theme = ExtResource("4_67ttm")
 theme_override_font_sizes/font_size = 30
 text = "Back"
 
+[node name="Next Round" type="Button" parent="GameScreen"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme = ExtResource("4_67ttm")
+theme_override_font_sizes/font_size = 30
+text = "Next Round"
+
 [connection signal="item_selected" from="StartScreen/PlayerCount/OptionButton" to="." method="_on_number_of_players_selected"]
 [connection signal="pressed" from="StartScreen/AddPlayerButton" to="." method="_on_add_player_button_pressed"]
 [connection signal="button_up" from="StartScreen/Next" to="." method="_on_next_button_up"]
 [connection signal="button_up" from="GameScreen/Back" to="." method="_on_back_button_up"]
+[connection signal="pressed" from="GameScreen/Next Round" to="." method="_on_next_round_pressed"]

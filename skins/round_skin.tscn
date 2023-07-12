@@ -5,13 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://yqtk12djqhq8" path="res://effects/tween.tscn" id="3_d1p2s"]
 
 [node name="RoundSkin" type="Control"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme = ExtResource("1_k6w4w")
 script = ExtResource("1_c47ma")
 
