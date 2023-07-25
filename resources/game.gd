@@ -10,6 +10,7 @@ class_name GameInfo
 @onready var player_list = $StartScreen/PlayerList
 @onready var rounds_list_container = $GameScreen/ScrollContainer/HBoxContainer/RoundsList
 @onready var rounds_grid = $GameScreen/ScrollContainer/HBoxContainer/RoundsGrid
+@onready var current_round = 1
 @onready var round_list = []
 @onready var rounds_count = []
 @onready var round_skin = preload("res://skins/round_skin.tscn")
@@ -81,6 +82,31 @@ func refresh_round_list_grid():
 	rounds_grid.columns = globals.number_of_players
 	for child in rounds_grid.get_children():
 		rounds_grid.remove_child(child)
+	
+#	 currentRound: number;
+#    rounds: IRound[];
+#    players: Player[];
+#    nextRound: () => void;
+#    playersCount: number;
+#    score: number[];
+	
+func add_round_to_grid():
+	var round = round_skin.instantiate()
+	rounds_grid.add_child(round)
+#
+#func calculateScore(round: number): 
+#	for player in game.players:
+#		let bet = game.rounds[round].bet[index];
+#		let close = game.rounds[round].close[index];
+#
+#	if bet == close:
+#		game.score[index] = game.score[index] + 5 + bet;
+#
+#	if bet !== close:
+#	game.score[index] = game.score[index] - Math.abs(bet - close)
+#
+	
+func add_rounds_to_grid():
 	for child in globals.number_of_players:
 		for r in round_list:
 			var skin = round_skin.instantiate()
@@ -147,3 +173,17 @@ func _on_add_player_button_pressed():
 	var apu = add_player_ui.instantiate()
 	apu.connect("add_player",add_player_name)
 	add_child(apu)
+
+func open_bet_dialog():
+	# create dialog
+	# get inputs from dialog
+	# place bet in rounds grid
+	# get round as 3 inputs
+	# cancel round in ui
+	# add only if got the input
+	pass
+
+func _on_next_round_pressed() -> void:
+	add_round_to_grid()
+	current_round = current_round + 1
+	$"GameScreen/Next Round".text = str("Next : ", current_round)
