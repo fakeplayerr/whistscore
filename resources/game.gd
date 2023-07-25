@@ -1,7 +1,6 @@
 extends Node
 class_name GameInfo
 
-@export var scoreboard : Scoreboard
 @export var globals : GlobalInfo
 
 #var tween = TweenEffect.new()
@@ -16,6 +15,7 @@ class_name GameInfo
 @onready var round_skin = preload("res://skins/round_skin.tscn")
 @onready var round_header = preload("res://skins/round_header/round_header.tscn")
 @onready var add_player_ui = preload("res://UI/add_player_ui/add_player_ui.tscn")
+@onready var quit_game_dialog = preload("res://scenes/dialog.tscn")
 
 func _ready() -> void:
 	
@@ -25,7 +25,7 @@ func add_player_name(player_name):
 	if player_name != "":
 		var player = Player.new()
 		player.name = player_name
-		scoreboard.round_manager.players.push_back(player)
+#		scoreboard.round_manager.players.push_back(player)
 		refresh_players_table()
 	
 func add_players_to_list(player_name):
@@ -37,29 +37,23 @@ func add_players_to_list(player_name):
 func refresh_players_table():
 	for child in player_list.get_children():
 		player_list.remove_child(child)
-	for i in scoreboard.round_manager.players:
-		add_players_to_list(str(i.name))
+#	for i in scoreboard.round_manager.players:
+#		add_players_to_list(str(i.name))
 		
 func back_to_start_menu():
-	var tween = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_OUT)
-	tween.tween_property($StartScreen, "position", Vector2(0,0),0.2)
-	var tween2 = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_OUT)
-	tween2.tween_property($GameScreen, "position", Vector2($GameScreen.size.x,0),0.2)
+	var dialog = quit_game_dialog.instantiate()
+	dialog.position = get_window().position
+	print(get_window().position.x)
+	print(get_window().position / 2)
+	add_child(dialog)
+	print("CALLED")
+#	var tween = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_OUT)
+#	tween.tween_property($StartScreen, "position", Vector2(0,0),0.2)
+#	var tween2 = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_OUT)
+#	tween2.tween_property($GameScreen, "position", Vector2($GameScreen.size.x,0),0.2)
+#	dialog.queue_free()
 	
 
-func create_rounds():
-	round_list.clear()
-	for i in globals.number_of_players:
-		round_list.push_back("1")
-	for i in range(2,8):
-		round_list.push_back(str(i))
-	for i in globals.number_of_players:
-		round_list.push_back("8")		
-	for i in range(7,1,-1):
-		round_list.push_back(str(i))
-	for i in globals.number_of_players:
-		round_list.push_back("1")
-	print("ROUNDS: ", round_list)
 
 func set_defaults():
 	# set game text
@@ -68,12 +62,11 @@ func set_defaults():
 	globals.number_of_players = button_number_of_players.get_item_text(button_number_of_players.selected)
 	# set the roundsList number
 	print(globals.number_of_players)
-	
 #
 #	for i in globals.number_of_players:
 #		add_players(str("Player " , i))
 	
-	create_rounds()
+	
 	refresh_round_list_table()
 	refresh_round_list_grid()
 
@@ -137,7 +130,7 @@ func _on_number_of_players_selected(index: int) -> void:
 	refresh_players_table()
 	refresh_round_list_table()
 	refresh_round_list_grid()
-	create_rounds()
+	globals.create_rounds()
 
 
 func _on_next_button_up() -> void:

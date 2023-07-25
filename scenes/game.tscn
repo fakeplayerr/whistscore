@@ -1,29 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://tfqdb43t237a"]
+[gd_scene load_steps=5 format=3 uid="uid://tfqdb43t237a"]
 
 [ext_resource type="Script" path="res://resources/game.gd" id="1_vhiy2"]
-[ext_resource type="Script" path="res://resources/scoreboard.gd" id="2_1qrak"]
-[ext_resource type="Script" path="res://resources/round_manager.gd" id="2_5rmhc"]
 [ext_resource type="Script" path="res://resources/globals.gd" id="3_ut2ur"]
 [ext_resource type="Theme" uid="uid://bed6prpoafpry" path="res://assets/theme.tres" id="4_67ttm"]
-
-[sub_resource type="Resource" id="Resource_r2c4k"]
-script = ExtResource("2_5rmhc")
-rounds = Array[Resource("res://resources/round.gd")]([])
-players = Array[Resource("res://resources/player.gd")]([])
-
-[sub_resource type="Resource" id="Resource_em1av"]
-script = ExtResource("2_1qrak")
-round_manager = SubResource("Resource_r2c4k")
 
 [sub_resource type="Resource" id="Resource_r1kke"]
 script = ExtResource("3_ut2ur")
 score = 0
 game_name = "GG"
 number_of_players = 0
+current_round = 0
+rounds = Array[Resource("res://resources/round.gd")]([])
 
 [node name="Game" type="Node"]
 script = ExtResource("1_vhiy2")
-scoreboard = SubResource("Resource_em1av")
 globals = SubResource("Resource_r1kke")
 
 [node name="StartScreen" type="VBoxContainer" parent="."]

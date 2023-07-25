@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://dupj7lnwyfb40"]
+
+[ext_resource type="Script" path="res://scenes/dialog.gd" id="1_qo311"]
+[ext_resource type="Theme" uid="uid://bed6prpoafpry" path="res://assets/theme.tres" id="1_upqw6"]
+
+[node name="Dialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qo311")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Are you sure you want to reset the game?"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Cancel" type="Button" parent="VBoxContainer/HBoxContainer"]
+modulate = Color(0.964706, 0.694118, 0.760784, 1)
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_upqw6")
+text = "Cancel"
+
+[node name="Confirm" type="Button" parent="VBoxContainer/HBoxContainer"]
+modulate = Color(0.215686, 0.509804, 0.423529, 1)
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_upqw6")
+text = "Confirm"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
